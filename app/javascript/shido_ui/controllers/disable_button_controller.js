@@ -23,7 +23,6 @@ export default class extends Controller {
       this.linkTarget.classList.add('disabled');
       this.linkTarget.innerHTML = 'Aguarde...';
     }
-
   }
 
   stop() {

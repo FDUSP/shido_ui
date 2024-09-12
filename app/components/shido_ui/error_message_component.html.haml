@@ -1,0 +1,13 @@
+- if @object.errors.any?
+  %article.message{ class: "is-#{@type} #{fade_out}", 
+    data: { turbo_temporary: true, controller: 'error-message-component', 'error-message-component-auto-close-value': "#{@auto_close}" } }
+    .message-header
+      = @message.html_safe
+      %button.delete{ 'aria-label': "delete", data: { action: 'click->error-message-component#close' }}
+
+    - if local?
+      .message-body
+        %p= @object.errors.messages[:base].join(", ")
+        %ul
+          - @object.errors.full_messages.each do |msg|
+            %li= msg
