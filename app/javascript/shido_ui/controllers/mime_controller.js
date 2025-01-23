@@ -36,7 +36,8 @@ async function handleResponse(response, that) {
     } else {
       const body = await response.text();
       Turbo.renderStreamMessage(body);
-      that.closeModal();
+      if (response.status !== 422)
+        that.closeModal();
     }
 
   } catch (err) {
@@ -67,10 +68,10 @@ export default class extends Controller {
       body: new FormData(this.formTarget),
     })
     .then(response => {
-      if (response.ok) {
+      if (response.ok || response.status === 422) {
         handleResponse(response, that);
       } else {
-        console.log('response != 200');
+        console.log('response != 200 or 422');
       }
       this.buttonTarget.disabled = false;
       this.buttonTarget.textContent = 'Pesquisar';
