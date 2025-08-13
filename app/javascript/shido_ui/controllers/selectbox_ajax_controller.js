@@ -18,6 +18,8 @@ export default class extends Controller {
       allowHTML: false,
       searchPlaceholderValue: this.placeholderValue,
       renderChoiceLimit: 5,
+      removeItems: true,
+      removeItemButton: true,
       classNames: {
         containerInner: 'my__choices__inner',
       },
