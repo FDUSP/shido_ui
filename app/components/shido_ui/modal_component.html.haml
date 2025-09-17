@@ -1,5 +1,5 @@
 #modal-here.modal{ tabindex: "-1", role: "dialog", 'aria-labelledby': "modal-here", 'aria-hidden': "true", 
   data: { controller: 'modal-component', action: 'keydown.esc@window->modal-component#close turbo:submit-end->modal-component#submitEnd', 'modal-component-auto-close-value': "#{@auto_close}", turbo_temporary: true }}
   .modal-background
-    .modal-card{ style: "overflow: auto; width: #{@modal_width};" }
+    .modal-card{ style: "overflow: auto;" }
     = content
