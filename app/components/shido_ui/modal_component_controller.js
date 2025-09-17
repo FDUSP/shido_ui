@@ -33,10 +33,10 @@ export default class extends Controller {
     // }
   }
 
-  close(e) {
-    e.preventDefault();
+  close() {
     this.element.classList.remove('is-active');
     this.element.classList.remove('animate__animated');
     this.element.classList.remove('animate__pulse');
+    this.element.remove();
   }
 }
