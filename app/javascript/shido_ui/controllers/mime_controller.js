@@ -83,6 +83,17 @@ export default class extends Controller {
     });
   }
 
+  submitOnEnter(event) {
+    console.log('enter key pressed');
+    // evita que Enter dentro de selects ou textareas dispare submit
+    const isTextInput = ["INPUT"].includes(event.target.tagName);
+    const type = event.target.type;
+
+    if (event.key === "Enter" && isTextInput && type !== "textarea") {
+      this.execute(event);
+    }
+  }
+
   closeModal() {
     this.dispatch('close-modal');
   }
