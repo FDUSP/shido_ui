@@ -1,3 +1,3 @@
 module ShidoUi
-  VERSION = "0.1.94"
+  VERSION = "0.3.0"
 end
