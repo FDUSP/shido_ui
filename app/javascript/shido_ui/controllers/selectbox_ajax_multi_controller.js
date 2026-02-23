@@ -2,7 +2,7 @@ import { Controller } from '@hotwired/stimulus'
 import Choices from 'choices.js'
 
 export default class extends Controller {
-  static targets = ['select']
+  static targets = ['my']
   static values = {
     urlCollection: String,
     labelName: String,
@@ -10,12 +10,13 @@ export default class extends Controller {
   }
 
   connect() {
-    if (!this.hasSelectTarget) return
+    console.log('START SELECTBOXAJAXMULTI')
+    if (!this.hasMyTarget) return
 
     this.abortController = null
     this.debounceTimer = null
 
-    this.choices = new Choices(this.selectTarget, {
+    this.choices = new Choices(this.myTarget, {
       allowHTML: false,
       removeItemButton: true,
       searchPlaceholderValue: this.placeholderValue,
@@ -41,7 +42,7 @@ export default class extends Controller {
   }
 
   setupSearchListener() {
-    this.selectTarget.addEventListener('search', (event) => {
+    this.myTarget.addEventListener('search', event => {
       const value = event.detail.value
 
       clearTimeout(this.debounceTimer)
@@ -63,7 +64,7 @@ export default class extends Controller {
 
     try {
       const response = await fetch(
-        `${this.urlValue}?q=${encodeURIComponent(query)}`,
+        `${this.urlCollectionValue}?q=${encodeURIComponent(query)}`,
         { signal: this.abortController.signal }
       )
 
@@ -71,7 +72,7 @@ export default class extends Controller {
 
       const choices = data.map(item => ({
         value: String(item.id),
-        label: item[this.labelValue]
+        label: item[this.labelNameValue]
       }))
 
       this.choices.clearChoices()
@@ -85,7 +86,7 @@ export default class extends Controller {
   }
 
   setInitialValue() {
-    const val = this.selectTarget.dataset?.val
+    const val = this.myTarget.dataset?.val
     if (!val) return
 
     try {
