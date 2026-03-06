@@ -1,0 +1,12 @@
+.box{ data: { controller: "camera-component", 'camera-component-url-value': url, action: 'camera-component:close-modal->modal-component#close' }}
+  .has-text-centered
+    %video{ data: { camera_component_target: "video" }, autoplay: true, playsinline: true, style: "width: 320px; height: 320px; object-fit: cover;" }
+
+    %canvas{ data: { camera_component_target: "canvas" }, class: "is-hidden" }
+
+    %p{ data: { camera_component_target: "status" }, class: "mt-2 has-text-grey" }
+      Posicione o rosto
+
+    .buttons.is-centered.mt-4
+      %button.button.is-primary{ type: "button", class: "", data: { camera_component_target: "captureButton", action: "camera-component#capture" }}
+        📸 Capturar
