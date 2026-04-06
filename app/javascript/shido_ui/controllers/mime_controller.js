@@ -48,7 +48,8 @@ async function handleResponse(response, that) {
 export default class extends Controller {
   static targets = ['form', 'button'];
   static values = {
-    url: String
+    url: String,
+    method: { type: String, default: 'POST' },
   }
 
   execute(e) {
@@ -58,7 +59,7 @@ export default class extends Controller {
     this.buttonTarget.textContent = 'Aguarde...';
 
     fetch(this.urlValue, {
-      method: 'POST',
+      method: this.methodValue,
       credentials: 'same-origin',
       headers: {
         'Accept': 'text/vnd.turbo-stream.html',
