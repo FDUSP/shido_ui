@@ -28,7 +28,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "webdrivers"
   spec.add_dependency "image_processing", "~> 1.2"
   spec.add_dependency "stimulus-rails"
-  spec.add_dependency "turbo-rails", "~> 1.3"
+  spec.add_dependency "turbo-rails"
   spec.add_dependency "watir"
   spec.add_dependency "pagy"
   spec.add_dependency "haml-rails"
