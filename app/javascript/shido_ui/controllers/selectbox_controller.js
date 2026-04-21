@@ -16,7 +16,10 @@ export default class extends Controller {
   }
 
   disconnect() {
-    this.choices.destroy();
+    if (this.choices) {
+      this.choices.destroy();
+      this.choices = null;
+    }
   }
 
 }

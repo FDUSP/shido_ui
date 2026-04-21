@@ -55,7 +55,9 @@ export default class extends Controller {
   }
 
   disconnect() {
-    //if (!this.choices === undefined)
-    this.choices.destroy();
+    if (this.choices) {
+      this.choices.destroy();
+      this.choices = null;
+    } 
   }
 }
