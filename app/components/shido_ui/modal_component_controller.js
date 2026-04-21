@@ -27,11 +27,12 @@ export default class extends Controller {
     }
   }
 
-  submitEnd(e) {
-    // if (e.detail.success && this.autoClose) {
-    //   this.close();
-    // }
-  }
+  submitEnd(event) {
+    const statusCode = event.detail.fetchResponse?.statusCode || event.detail.fetchResponse?.response?.status
+    if (!event.detail.success || statusCode === 422) return
+
+    this.close()
+  }  
 
   close() {
     this.element.classList.remove('is-active');
