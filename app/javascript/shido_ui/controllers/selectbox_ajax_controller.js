@@ -45,7 +45,7 @@ export default class extends Controller {
         if (this.myTarget.dataset.val.startsWith('[')) {
           instance.setChoiceByValue(JSON.parse(this.myTarget.dataset.val));
         } else {
-          instance.setChoiceByValue(parseInt(this.myTarget.dataset.val));
+          instance.setChoiceByValue(String(this.myTarget.dataset.val));
         }
       } catch (error) {
         console.error('Error setting choices:', error);
