@@ -3,9 +3,8 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   static targets = ['fileInput', 'fileName']
 
-  static values = {
-    menu: { type: String, default: '' },
-    submenu: { type: String, default: '' },
+  connect() {
+    console.log('START UPLOAD FIELD CONTROLLER')
   }
 
   updateFileName() {

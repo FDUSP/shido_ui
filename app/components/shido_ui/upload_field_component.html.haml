@@ -6,6 +6,6 @@
       %span.file-icon
         %span.fas.fa-upload
       %span.file-label= @file_label
-    - if @storage_object.attached? && @show_file_name
+    - if @show_file_name
       %span.file-name{ data: { upload_field_component_target: 'fileName' }}
-        = @storage_object.filename
+        = @storage_object.filename if @storage_object.attached?
