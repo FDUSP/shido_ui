@@ -13,14 +13,13 @@ export default class extends Controller {
   start() {
     // Submit button
     if (this.hasButtonTarget) {
-      this.buttonTarget.disabled = true;
-      this.buttonTarget.classList.add('disabled');
       this.buttonTarget.value = 'Aguarde...';
+      this.disableButton();
     }
 
     // Link button
     if (this.hasLinkTarget) {
-      this.linkTarget.classList.add('disabled');
+      this.linkTarget.style.pointerEvents = 'none';
       this.linkTarget.innerHTML = 'Aguarde...';
     }
   }
@@ -28,15 +27,26 @@ export default class extends Controller {
   stop() {
     // Submit button
     if (this.hasButtonTarget) {
-      this.buttonTarget.disabled = false;
-      this.buttonTarget.classList.remove('disabled');
+      this.enableButton();
       this.buttonTarget.value = this.labelValue;
     }
 
     // Link button
     if (this.hasLinkTarget) {
-      this.linkTarget.classList.remove('disabled');
+      this.linkTarget.style.pointerEvents = 'auto';
       this.linkTarget.innerHTML = this.labelValue;
     }
+  }
+
+  disableButton() {
+    this.buttonTarget.disabled = true;
+    this.buttonTarget.setAttribute('disabled', 'disabled');
+    this.buttonTarget.setAttribute('aria-disabled', 'true');
+  }
+
+  enableButton() {
+    this.buttonTarget.disabled = false;
+    this.buttonTarget.removeAttribute('disabled');
+    this.buttonTarget.removeAttribute('aria-disabled');
   }
 }
