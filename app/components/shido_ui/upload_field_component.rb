@@ -10,7 +10,7 @@ module ShidoUi
     end
 
     def storage
-      @storage ||= @f.object.send(@field_name)
+      @storage ||= @f.object.try(@field_name)
     end 
   end
 end
