@@ -8,4 +8,4 @@
       %span.file-label= @file_label
     - if @show_file_name
       %span.file-name{ data: { upload_field_component_target: 'fileName' }}
-        = storage.filename if storage&.attached?
+        = storage&.filename if storage&.attached?
