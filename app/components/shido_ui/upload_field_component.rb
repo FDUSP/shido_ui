@@ -14,5 +14,9 @@ module ShidoUi
     def storage
       @storage ||= @f.try(:object)&.try(@field_name)
     end
+
+    def multiple_attachment?(attachment)
+      attachment.is_a?(ActiveStorage::Attached::Many)
+    end
   end
 end
