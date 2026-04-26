@@ -1,6 +1,6 @@
 .file.has-name{ **@css_args, data: { controller: 'upload-field-component' } }
   %label.file-label
-    = @f.file_field @field_name, class: 'file-input', accept: @accept,
+    = @f.file_field @field_name, class: 'file-input', accept: @accept, multiple: @multiple,
       data: { upload_field_component_target: 'fileInput', action: 'change->upload-field-component#updateFileName' }
     %span.file-cta
       %span.file-icon
