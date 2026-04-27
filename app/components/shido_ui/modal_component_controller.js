@@ -28,6 +28,7 @@ export default class extends Controller {
   }
 
   submitEnd(event) {
+    if (!this.autoCloseValue) return;
     const statusCode = event.detail.fetchResponse?.statusCode || event.detail.fetchResponse?.response?.status
     if (!event.detail.success || statusCode === 422) return
 
