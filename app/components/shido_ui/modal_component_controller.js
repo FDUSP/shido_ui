@@ -28,6 +28,8 @@ export default class extends Controller {
   }
 
   submitEnd(event) {
+    if (event.target?.dataset?.modalCloseOnSubmit === "false") return;
+
     const statusCode = event.detail.fetchResponse?.statusCode || event.detail.fetchResponse?.response?.status
     if (!event.detail.success || statusCode === 422) return
 
