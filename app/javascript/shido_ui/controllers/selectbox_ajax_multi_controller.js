@@ -85,13 +85,29 @@ export default class extends Controller {
     }
   }
 
-  setInitialValue() {
+  async setInitialValue() {
     const val = this.myTarget.dataset?.val
     if (!val) return
 
     try {
-      const parsed = val.startsWith('[') ? JSON.parse(val) : [val]
-      this.choices.setChoiceByValue(parsed.map(String))
+      const values = (val.startsWith('[') ? JSON.parse(val) : [val]).map(String)
+      const choices = []
+
+      for (const value of values) {
+        const response = await fetch(`${this.urlCollectionValue}?q=${encodeURIComponent(value)}`)
+        const data = await response.json()
+        const item = data.find(item => String(item.id) === value) || data[0]
+
+        if (item) {
+          choices.push({
+            value: String(item.id),
+            label: item[this.labelNameValue]
+          })
+        }
+      }
+
+      this.choices.setChoices(choices, 'value', 'label', false)
+      this.choices.setChoiceByValue(values)
     } catch (e) {
       console.warn('Invalid initial value', e)
     }
