@@ -31,6 +31,13 @@ export default class extends Controller {
   }
 
   mask() {
+    const normalized = this.normalizePersistedDateTime(this.input.value)
+
+    if (normalized) {
+      this.input.value = normalized
+      return
+    }
+
     const value = this.input.value.replace(/\D/g, "").slice(0, 12)
     let masked = value.slice(0, 2)
 
@@ -40,5 +47,15 @@ export default class extends Controller {
     if (value.length > 10) masked += `:${value.slice(10, 12)}`
 
     this.input.value = masked
+  }
+
+  normalizePersistedDateTime(value) {
+    const matches = value.trim().match(/^(\d{4})-(\d{2})-(\d{2})(?:[ T](\d{2}):(\d{2}))?/)
+
+    if (!matches) return null
+
+    const [, year, month, day, hour = "00", minute = "00"] = matches
+
+    return `${day}/${month}/${year} ${hour}:${minute}`
   }
 }

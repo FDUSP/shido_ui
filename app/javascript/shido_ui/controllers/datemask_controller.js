@@ -31,6 +31,13 @@ export default class extends Controller {
   }
 
   mask() {
+    const normalized = this.normalizePersistedDate(this.input.value)
+
+    if (normalized) {
+      this.input.value = normalized
+      return
+    }
+
     const value = this.input.value.replace(/\D/g, "").slice(0, 8)
     const parts = []
 
@@ -39,5 +46,15 @@ export default class extends Controller {
     if (value.length > 4) parts.push(value.slice(4, 8))
 
     this.input.value = parts.join("/")
+  }
+
+  normalizePersistedDate(value) {
+    const matches = value.trim().match(/^(\d{4})-(\d{2})-(\d{2})/)
+
+    if (!matches) return null
+
+    const [, year, month, day] = matches
+
+    return `${day}/${month}/${year}`
   }
 }
