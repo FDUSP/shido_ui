@@ -31,11 +31,28 @@ export default class extends Controller {
   }
 
   mask() {
+    const normalized = this.normalizePersistedTime(this.input.value)
+
+    if (normalized) {
+      this.input.value = normalized
+      return
+    }
+
     const value = this.input.value.replace(/\D/g, "").slice(0, 4)
     let masked = value.slice(0, 2)
 
     if (value.length > 2) masked += `:${value.slice(2, 4)}`
 
     this.input.value = masked
+  }
+
+  normalizePersistedTime(value) {
+    const dateTimeMatches = value.trim().match(/^\d{4}-\d{2}-\d{2}[ T](\d{2}):(\d{2})/)
+    if (dateTimeMatches) return `${dateTimeMatches[1]}:${dateTimeMatches[2]}`
+
+    const timeMatches = value.trim().match(/^(\d{2}):(\d{2})(?::\d{2})?/)
+    if (timeMatches) return `${timeMatches[1]}:${timeMatches[2]}`
+
+    return null
   }
 }
