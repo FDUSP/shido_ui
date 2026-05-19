@@ -34,7 +34,18 @@ export default class extends Controller {
     if (!event.detail.success || statusCode === 422) return
 
     this.close()
-  }  
+  }
+
+  escape(event) {
+    // Don't close the modal if the user is focused on an input, textarea, select, or contenteditable element
+    const target = event.target;
+
+    if (target?.matches?.('input, textarea, select, [contenteditable="true"]')) {
+      return;
+    }
+
+    this.close();
+  }
 
   close() {
     this.element.classList.remove('is-active');
