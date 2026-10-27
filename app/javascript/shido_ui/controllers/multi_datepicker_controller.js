@@ -13,7 +13,8 @@ export default class extends Controller {
       mode: 'multiple',
       allowInput: true,
       dateFormat: "d/m/Y",
-      static: true,
+      // em modal o calendário vai para o body: o .modal-card-body rola e cortaria o calendário
+      static: !this.element.closest('.modal'),
     });
   }
 

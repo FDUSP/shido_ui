@@ -10,7 +10,8 @@ export default class extends Controller {
 
     this.fp = flatPickr(this.dtTarget, {
       "locale": "pt",
-      static: true,
+      // em modal o calendário vai para o body: o .modal-card-body rola e cortaria o calendário
+      static: !this.element.closest('.modal'),
       allowInput: true,
       dateFormat: "d/m/Y",
     });
